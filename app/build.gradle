@@ -7,7 +7,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.jocnunez.listas"
+        applicationId "com.MaLiRu9.listas"
         minSdk 27
         targetSdk 33
         versionCode 1
