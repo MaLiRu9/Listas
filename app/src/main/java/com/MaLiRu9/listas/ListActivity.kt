@@ -10,7 +10,6 @@ import com.jocnunez.listas.R
 import java.util.*
 
 class ListActivity : AppCompatActivity() {
-
     var list: MutableList<String> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,18 +17,27 @@ class ListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_list)
         Log.d("Debug", "List activity open")
 
+        val listService = ListService(this)
+        list = listService.getListFromFile()
+        list.forEach {
+            addItemToLayout(it)
+        }
+
         val newItem = findViewById<Button>(R.id.newButton)
         newItem.setOnClickListener {
-            addNewitem()
+            addNewitem(listService)
         }
     }
 
-    private fun addNewitem() {
+    private fun addNewitem(service: ListService) {
         val randomText: String = Date().toString()
-        list.add(randomText)
+        service.addItemToList(randomText)
+        addItemToLayout(randomText)
+    }
 
+    private fun addItemToLayout(text: String) {
         val textView = TextView(this)
-        textView.text = randomText
+        textView.text = text
 
         val listLayout = findViewById<LinearLayout>(R.id.listLayout)
         listLayout.addView(textView)
