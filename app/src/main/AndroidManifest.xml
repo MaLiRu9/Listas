@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Listas">
         <activity
+            android:name="com.MaLiRu9.listas.ListActivity"
+            android:exported="false" />
+        <activity
             android:name="com.MaLiRu9.listas.MainActivity"
             android:exported="true">
             <intent-filter>

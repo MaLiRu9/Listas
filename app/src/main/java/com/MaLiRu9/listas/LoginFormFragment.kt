@@ -1,5 +1,6 @@
 package com.MaLiRu9.listas
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,6 +21,10 @@ class LoginFormFragment : Fragment() {
         val nextButton = view.findViewById<Button>(R.id.nextButton)
         nextButton.setOnClickListener {
             Log.d("Debug", "Click on next button")
+            val intent = Intent(context, ListActivity::class.java).apply {
+                Log.d("Debug","New intent: " + context.toString())
+            }
+            startActivity(intent)
         }
         return view
     }
