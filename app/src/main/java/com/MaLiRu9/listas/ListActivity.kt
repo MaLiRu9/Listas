@@ -4,13 +4,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.jocnunez.listas.R
+import org.json.JSONArray
 import java.util.*
 
 class ListActivity : AppCompatActivity() {
     var list: MutableList<String> = mutableListOf()
+    var json = JSONArray()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +22,10 @@ class ListActivity : AppCompatActivity() {
         Log.d("Debug", "List activity open")
 
         val listService = ListService(this)
+        json = listService.getList()
+        for (i in 0 until json.length()){
+
+        }
         list = listService.getListFromFile()
         list.forEach {
             addItemToLayout(it)
@@ -25,7 +33,17 @@ class ListActivity : AppCompatActivity() {
 
         val newItem = findViewById<Button>(R.id.newButton)
         newItem.setOnClickListener {
-            addNewitem(listService)
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            val fragment = ItemDetailFragment()
+            fragmentTransaction.replace(R.id.DetailLayout, fragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
+        val ListLayout = findViewById<LinearLayout>(R.id.listLayout)
+        listLayout.setOnClickListener{
+            Log.d("Debug", "Click in: " + it.id)
+
         }
     }
 
